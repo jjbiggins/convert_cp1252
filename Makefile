@@ -3,7 +3,7 @@ SRC_DIR := src
 INC_DIR := include
 
 $(TARGET_EXEC): 
-	cc -o $(TARGET_EXEC) $(SRC_DIR)/*.c -I $(INC_DIR) -Wall -Wextra -Wpedantic -std=c11
+	gcc -o $(TARGET_EXEC) $(SRC_DIR)/*.c -I $(INC_DIR) -Wall -Wextra -Wpedantic -std=c11
 
 .PHONY: run
 run: $(TARGET_EXEC) test
