@@ -1,4 +1,4 @@
-TARGET_EXEC := encoder
+TARGET_EXEC := convert_cp1252
 SRC_DIR := src
 INC_DIR := include
 

@@ -58,11 +58,11 @@ int main(int argc, char **argv)
         return EXIT_FAILURE;
     }
 
-    /*ofile = fopen(ofp, "w");
+    ofile = fopen(ofp, "w");
     if (ofile == NULL) {
         perror("can't open target file or create");
         return EXIT_FAILURE;
-    }*/
+    }
 
     const utf_8 *charmap = actual_charmap(encoding);
     if (charmap == NULL) {
@@ -72,10 +72,10 @@ int main(int argc, char **argv)
     int symbol = 0;
     while ((symbol = fgetc(ifile)) != EOF)
     {
-        utf_8 code = encode(symbol, charmap);
+        code = encode(symbol, charmap);
         for (size_t i = 0; i < code.size; i++) 
         {
-            int err = fputc(code.bytes[i], stdout);
+            int err = fputc(code.bytes[i], ofile);
             if (err == EOF) {
                 perror("write error");
                 return EXIT_FAILURE;
