@@ -1,18 +1,32 @@
-TARGET_EXEC := convert_cp1252
-SRC_DIR := src
+TARGET_EXEC := custclean
+CC = gcc -std=gnu99
+
+DEBUG_LEVEL := -g
+EXTRA_CFLAGS := -Wall
+CXXFLAGS := $(DEBUG_LEVEL) $(EXTRA_CCFLAGS)
+CFLAGS := $(CXXFLAGS)
+
 INC_DIR := include
+SRC_DIR := src
+
+SRCS := $(wildcard $(SRC_DIR)/*.c)
+
 
 $(TARGET_EXEC): 
-	gcc -o $(TARGET_EXEC) $(SRC_DIR)/*.c -I $(INC_DIR) -Wall -Wextra -Wpedantic -std=c11
+	$(CC) -o $(TARGET_EXEC) $(SRCS) -I $(INC_DIR) $(CFLAGS)
 
 .PHONY: run
-run: $(TARGET_EXEC) test
-	./$(TARGET_EXEC) files/cp1251.txt cp1252 test/cp1251.txt
+run: $(TARGET_EXEC) test 
+	$(TARGET_EXEC) tests/cp1252.csv 
+
 
 .PHONY: clean
 clean:
 	-rm $(TARGET_EXEC)
 
-.PHONY: test
+
+.PHONY: test 
 test:
-	mkdir -p test
+	mkdir -p tests
+
+
